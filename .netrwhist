@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/jeremiahlukus/webBootColt/css/imgGal'
+let g:netrw_dirhist_2='/Users/jeremiahlukus/jeremiahlukus.github.io'
+let g:netrw_dirhist_3='/Users/jeremiahlukus/webBootColt/css/imgGal'
