@@ -1,6 +1,7 @@
 # dotvim
-holds my vim profile
-BACK UP YOUR .vim AND .vimrc THE FIRST FEW LINES DELEATE THEM!!
+holds my vim profile  and my bash profile
+
+BACK UP YOUR .vim AND .vimrc THE FIRST FEW LINES DELETE THEM!!
 
 
 I highly recommend you go https://www.iterm2.com/ and use this terminal. You can use Mac's built in terminal if you want to. 
@@ -27,11 +28,13 @@ then install homebrew
 Next clone my repo
 `git clone http://github.com/jeremiahlukus/dotvim.git` 
 
-Here we are soft linking a few files 
+Here we are soft linking a few files  (or you could simply move them into your home directory)
 
-`ln -s ~/.vim/vimrc ~/.vimrc`
-
+`ln -s ~/.vim/.vimrc ~/.vimrc`
 `ln -s ~/.vim/gvimrc ~/.gvimrc`
+`ln -s ~/.vim/.bash_profile ~/.bash_profile`
+
+
 
 Now clone Vundle 
 `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
