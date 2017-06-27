@@ -1,37 +1,61 @@
 execute pathogen#infect()
-let g:user_emmet_leader_key=',' " sets emmit hoykey ,,
-set t_Co=256   
 
 " This is vundle 
 set nocompatible              " required
 filetype off                  " required
- let mapleader = " " 
+
+
+
+let g:user_emmet_leader_key=',' " sets emmit hoykey ,,
+let mapleader = " " 
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"let g:ackprg = 'rg -vimgrep --no-heading'
 
-"Switch between the last two files
-nnoremap <leader> <c-^>
 
+set t_Co=256   
 set visualbell t_vb= 
 set ruler
 set foldmethod=indent
 set foldlevel=99
 set relativenumber
 set number
+set encoding=utf-8
+set wildignore+=*/cms_fixtures/*
+
+"Turn on spell Check"
+set spell spelllang=en_us
+"Word complete -- Not sure if i want this"
+set complete+=kspell
+
+
+" Mappings 
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"Get to ack to leader a"
+nnoremap <leader>a :Ack
+"Switch between the last two files
+nnoremap <leader> <c-^>
+
+"Folding
+inoremap // <C-O>za
+nnoremap // za
+onoremap // <C-C>za
+vnoremap // zf
+
 "get out of insert mode with a super seldom used character sequence
 inoremap jj <ESC>
+inoremap zz <%= %>
 nnoremap <leader>e :edit 
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :tabnew<CR> 
 set backspace=indent,eol,start
 
-let g:ackprg = 'rg --vimgrep --no-heading'
 
 if executable('rg')
-  let g:ctrlp_user_command = 'rg --files %s'
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_switch_buffer = 'et'
+    let g:ctrlp_user_command = 'rg --files %s'
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_working_path_mode = 'ra'
+    let g:ctrlp_switch_buffer = 'et'
 endif
 
 "move around your splits with ctrl hjkl which b/c capslock is assigned to ctrl
@@ -65,15 +89,8 @@ map <Leader>vm :EVmodel
 
 map <Leader>bb :!bundle install<cr>
 
-set wildignore+=*/cms_fixtures/*
 "save files with leader s
 nnoremap <leader>S :w<cr>
-
-"Turn on spell Check"
-set spell spelllang=en_us
-"Word complete -- Not sure if i want this"
-set complete+=kspell
-
 " easytag stuff
 map <Leader>retag :!ctags -R
 
@@ -102,7 +119,8 @@ Plugin 'mattn/emmet-vim'
 
 Plugin 'scrooloose/nerdTree'
 
-
+"Search for text"
+Plugin 'mileszs/ack.vim'
 "Dependencies of snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
@@ -158,12 +176,12 @@ filetype plugin indent on    " required
 " ================
 syntax on                 " Enable syntax highlighting
 filetype plugin indent on " Enable filetype-specific indenting and plugins
- 
-     augroup myfiletypes
+
+augroup myfiletypes
     " Clear old autocmds in group
-     autocmd!
-   " autoindent with two spaces, always expand tabs
-     autocmd FileType ruby,eruby,yaml,markdown set ai sw=2 sts=2 et
+    autocmd!
+    " autoindent with two spaces, always expand tabs
+    autocmd FileType ruby,eruby,yaml,markdown set ai sw=2 sts=2 et
 augroup END
 " ================
 
@@ -177,17 +195,18 @@ let g:molokai_original = 1
 colorscheme molokai
 
 
-
-autocmd BufRead *.py
+au BufNewFile,BufRead *.py
     \ set tabstop=4
     \ set softtabstop=4
     \ set shiftwidth=4
-    \ set textwidth=80
+    \ set textwidth=79
     \ set expandtab
     \ set autoindent
     \ set fileformat=unix
 
 
+
+let g:pymode_indent = 0
 let python_highlight_all=1
 syntax on
 

@@ -18,7 +18,7 @@ alias boot="cd ~/webBootColt"
 alias railss="cd ~/railsApps"
 alias book="cd ~/railsApps/bookstore"
 alias time="cd ~/railsApps/timeLog"
-
+alias tutor="cd ~/tutor/tutrz"
 #rails app
 alias migrate="rake db:migrate"
 alias b='bin/rspec'
@@ -29,6 +29,7 @@ alias rs='bundle install && rails server -p 3000'
 
 # Zeus 
 alias zspec='zeus rspec spec/'
+alias zt='zeus test'
 alias zstart='zeus start'
 alias zs='zeus server'
 alias zc='zeus console'
@@ -39,6 +40,7 @@ alias gco='git checkout'
 alias gp='git push'
 alias ga='git add .'
 alias gc='git commit -m'
+alias gs='git status'
 
 acp (){
     git add -A && git commit -m "$1" && git push
