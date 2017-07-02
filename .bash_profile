@@ -1,6 +1,11 @@
-
+if command -v tmux>/dev/null; then
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+fi
 #  ALIAS
 #
+set bell-style none
+
+
 alias page="cd ~/jeremiahlukus.github.io"
 alias ls="ls -GFh"
 alias ..='cd ..'
