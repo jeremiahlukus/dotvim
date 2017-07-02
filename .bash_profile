@@ -8,6 +8,7 @@ alias ...='cd .. ; cd ..'
 alias pg='ping google.com'
 alias weather="curl -s wttr.in/Atlanta"
 alias vim="/usr/local/Cellar/vim/8.0.0502/bin/vim"
+alias pop="rake sample:populate"
 #Heroku
 alias hp="git push heroku master"
 alias ho="heroku open"

@@ -1,16 +1,18 @@
 execute pathogen#infect()
-
 " This is vundle 
 set nocompatible              " required
 filetype off                  " required
-
-
+imap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
+nmap <c-f> [s1z=<c-o>
 
 let g:user_emmet_leader_key=',' " sets emmit hoykey ,,
 let mapleader = " " 
 let g:ycm_autoclose_preview_window_after_completion=1
-"let g:ackprg = 'rg -vimgrep --no-heading'
 
+"""""""""""""""""""  FIGURE THIS OUT LATER   """"""""""""""""""
+" || error: Invalid value for '--max-count <NUM>': invalid digit found in string
+"let g:ackprg = 'rg -vimgrep --no-heading'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   
 set visualbell t_vb= 
@@ -52,7 +54,7 @@ nnoremap <leader>W gT
 
 
 "Get to ack to leader a"
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack 
 "Switch between the last two files
 nnoremap <leader> <c-^>
 
@@ -65,9 +67,11 @@ vnoremap // zf
 "get out of insert mode with a super seldom used character sequence
 inoremap jj <ESC>
 inoremap zz <%= %>
+nnoremap z1 1z=
 nnoremap <leader>e :edit 
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :tabnew<CR> 
+
 set backspace=indent,eol,start
 
 
