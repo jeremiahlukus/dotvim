@@ -2190,8 +2190,6 @@ iabbrev intutive intuitive
 iabbrev intutively intuitively
 iabbrev inudstry industry
 iabbrev inumerable innumerable
-iabbrev inv invite
-iabbrev invtion invitation
 iabbrev inventer inventor
 iabbrev invertibrates invertebrates
 iabbrev investingate investigate
