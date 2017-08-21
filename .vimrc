@@ -8,12 +8,30 @@ nmap <c-f> [s1z=<c-o>
 let g:user_emmet_leader_key=',' " sets emmit hoykey ,,
 let mapleader = " " 
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:xml_syntax_folding = 1
+let g:used_javascript_libs = 'react,jquery'
+let g:airline#extensions#tabline#enabled = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:neoformat_run_all_formatters = 1
+let g:neoformat_only_msg_on_error = 1
 
-"""""""""""""""""""  FIGURE THIS OUT LATER   """"""""""""""""""
-" || error: Invalid value for '--max-count <NUM>': invalid digit found in string
-"let g:ackprg = 'rg -vimgrep --no-heading'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:ackprg = 'rg --vimgrep --no-heading'
+if executable('rg')
+  let g:ctrlp_user_command = 'rg --files %s'
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_switch_buffer = 'et'
+endif
+
+
+set ttyfast
+set lazyredraw
 set t_Co=256   
 set visualbell t_vb= 
 set ruler
@@ -23,7 +41,9 @@ set relativenumber
 set number
 set encoding=utf-8
 set wildignore+=*/cms_fixtures/*
-
+"set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 "Turn on spell Check"
 set spell spelllang=en_us
 "Word complete -- Not sure if i want this"
@@ -37,7 +57,7 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>t :tabnew<Enter>
 " Close all except current tab
 nnoremap <leader>\ :tabonly<Enter>
-
+nnoremap <F1> :buffers<CR>:buffer<Space>
 " Navigating tabs
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
@@ -59,10 +79,15 @@ nnoremap <leader>a :Ack
 nnoremap <leader> <c-^>
 
 "Folding
-inoremap // <C-O>za
-nnoremap // za
-onoremap // <C-C>za
-vnoremap // zf
+inoremap /. <C-O>za
+nnoremap /. za
+onoremap /. <C-C>za
+vnoremap /. zf
+
+nnoremap <leader>f :Neoformat<Enter>
+
+" Fix brackets 
+inoremap {<CR> {<CR>}<C-o>O
 
 "get out of insert mode with a super seldom used character sequence
 inoremap jj <ESC>
@@ -71,7 +96,7 @@ nnoremap z1 1z=
 nnoremap <leader>e :edit 
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :tabnew<CR> 
-
+nnoremap <leader>b :!open % -a Google\ Chrome<CR>
 set backspace=indent,eol,start
 
 
@@ -120,6 +145,28 @@ map <Leader>retag :!ctags -R
 
 
 
+
+
+
+
+call plug#begin('~/.vim/plugged')
+
+" JS beauty
+Plug 'sbdchd/neoformat'
+
+
+
+
+call plug#end()
+
+
+
+
+
+
+
+
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -131,7 +178,9 @@ Plugin 'gmarik/Vundle.vim'
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 Plugin 'tmhedberg/SimpylFold'
 
-Plugin 'vim-scripts/indentpython.vim'
+
+"React syntax highlight
+Plugin 'mxw/vim-jsx'
 
 "Bundle 'Valloric/YouCompleteMe'
 
@@ -143,12 +192,7 @@ Plugin 'mattn/emmet-vim'
 
 Plugin 'scrooloose/nerdTree'
 
-"Search for text"
 Plugin 'mileszs/ack.vim'
-"Dependencies of snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/vim-snippets"
 
 " Good looking bottom :)
 Bundle 'bling/vim-airline'
@@ -159,8 +203,7 @@ Bundle 'gmarik/vundle'
 " Rails :/
 Bundle 'tpope/vim-rails.git'
 " Snippets for our use :)
-Bundle 'garbas/vim-snipmate'
-" Commenting and uncommenting stuff
+
 Bundle 'tomtom/tcomment_vim'
 " Beutiful solarized theme
 "Bundle 'altercation/vim-colors-solarized'
@@ -170,8 +213,6 @@ Bundle 'tomasr/molokai'
 Bundle 'vim-ruby/vim-ruby'
 " Surround your code :)
 Bundle 'tpope/vim-surround'
-" Every one should have a pair (Autogenerate pairs for "{[( )
-Bundle 'jiangmiao/auto-pairs'
 " Tab completions
 Bundle 'ervandew/supertab'
 " CoffeeScript syntax
@@ -187,7 +228,6 @@ Bundle 'tpope/vim-dispatch'
 " Gist
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
-Bundle 'danro/rename.vim'
 Bundle 'xolox/vim-easytags'
 Bundle 'xolox/vim-misc'
 " All of your Plugins must be added before the following line
@@ -210,8 +250,8 @@ augroup END
 " ================
 
 
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smartindent 
-
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smartindent 
+autocmd bufnew, bufread *.js setl cindent
 autocmd bufnew, bufread *.c setl cindent 
 autocmd bufnew, bufread *.java setl cindent
 syntax on
@@ -232,5 +272,6 @@ au BufNewFile,BufRead *.py
 
 let g:pymode_indent = 0
 let python_highlight_all=1
-syntax on
 
+
+syntax on

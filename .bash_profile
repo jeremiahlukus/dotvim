@@ -5,16 +5,17 @@
 #
 set bell-style none
 
-
+alias mac="open https://www.youtube.com/playlist?list=PL23ZvcdS3XPLNdRYB_QyomQsShx59tpc-"
+alias loc="open http://localhost:3000"
 alias page="cd ~/jeremiahlukus.github.io"
 alias ls="ls -GFh"
-alias ..='cd ..'
-alias ...='cd .. ; cd ..'
-alias pg='ping google.com'
+alias ..="cd .."
+alias ...="cd .. ; cd .."
+alias pg="ping google.com"
 alias weather="curl -s wttr.in/Atlanta"
 alias vim="/usr/local/Cellar/vim/8.0.0666_1/bin/vim"
 alias pop="rake sample:populate"
-alias gem="sudo gem install -n /usr/local/bin"
+alias swp="find ./ -type f -name "\.*sw[klmnop]" -delete"
 #Heroku
 alias hp="git push heroku master"
 alias ho="heroku open"
@@ -24,31 +25,39 @@ alias hrake="heroku run rake db:migrate"
 alias boot="cd ~/railsapps/webBootColt"
 alias railss="cd ~/railsApps"
 alias book="cd ~/railsApps/bookstore"
-alias time="cd ~/railsApps/timeLog"
+alias time="cd ~/railsApps/time-Log"
 alias tutor="cd ~/railsapps/tutrz"
+alias learnr="cd ~/railsapps/basicrails/reddit"
+alias learn="cd ~/railsapps/basicrails"
+#tutrz
+alias hredo="heroku pg:reset && heroku pg:push tutrz_development HEROKU_POSTGRESQL_AMBER_URL --app tutrz"
+
+
 #rails app
-alias migrate="rake db:migrate"
-alias b='bin/rspec'
-alias be='bundle exec'
+alias b="bin/rspec"
+alias be="bundle exec"
 alias bi="bundle install"
-alias rs='bundle install && rails server -p 3000'
-
-
+alias rs="bundle install && rails server -p 3000"
+alias dbredo="rake db:drop && rake db:create && rake db:migrate && rake db:setup"
+alias dbd="rake db:drop"
+alias dbc="rake db:create"
+alias dbm="rake db:migrate"
+alias bedbm="bundle exec rake db:migrate"
 # Zeus 
-alias zspec='zeus rspec spec/'
-alias zt='zeus test'
-alias zstart='zeus start'
-alias zs='zeus server'
-alias zc='zeus console'
+alias zspec="zeus rspec spec/"
+alias zt="zeus test"
+alias zstart="zeus start"
+alias zs="zeus server"
+alias zc="zeus console"
 
 #github 
 alias gundo="git reset --hard HEAD"
-alias gco='git checkout'
-alias gp='git push'
-alias ga='git add .'
-alias gc='git commit -m'
-alias gs='git status'
-alias gopen='git-browse-remote'
+alias gco="git checkout"
+alias gp="git push"
+alias ga="git add ."
+alias gc="git commit -m"
+alias gs="git status"
+alias gopen="git-browse-remote"
 
 acp (){
     git add -A && git commit -m "$1" && git push
@@ -58,7 +67,7 @@ acp (){
 set completion-ignore-case On
 set show-all-if-ambiguous On # this allows you to automatically show completion without double tab-ing configure my multi-line prompt
 
-PS1='\[\033[0;36m\]\h \w\[\033[0;32m\]$()\n\[\033[0;32m\]└─\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\] ▶\[\033[0m\] '
+PS1="\[\033[0;36m\]\h \w\[\033[0;32m\]$()\n\[\033[0;32m\]└─\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\] ▶\[\033[0m\] "
 
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
@@ -70,10 +79,9 @@ fi
 # Terminal Colors
 export CLICOLOR=1
 export TERM="xterm-256color"
-alias pg='ping google.com'
+alias pg="ping google.com"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 
 
 # Path to the bash it configuration
@@ -81,20 +89,20 @@ export BASH_IT="/Users/jeremiahparrack/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-export BASH_IT_THEME='iterate'
+export BASH_IT_THEME="bobby"
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
-# export BASH_IT_REMOTE='bash-it'
+# export BASH_IT_REMOTE="bash-it"
 
 # Your place for hosting Git repos. I use this for private repos.
-export GIT_HOSTING='git@git.domain.com'
+export GIT_HOSTING="git@git.domain.com"
 
-# Don't check mail when opening terminal.
+# Don"t check mail when opening terminal.
 unset MAILCHECK
 
 # Change this to your console based IRC client of choice.
-export IRC_CLIENT='irssi'
+export IRC_CLIENT="irssi"
 
 # Set this to the command you use for todo.txt-cli
 export TODO="t"
