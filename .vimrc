@@ -1,7 +1,42 @@
+" TABLE OF CONTENTS 
+"
+" (line 40) let 
+"
+"
+" (line 70) set 
+"
+"
+" (line 95) map
+"
+" (line 133) normal mode remap
+"
+" (line 183) insert mode remap 
+"
+"
+" (line 194) ruby settings
+"
+"
+"
+" (line 217) python settings
+"
+"
+" (line 240)  plug
+"
+"
+" (line 259) vundle 
+
+
 execute pathogen#infect()
 " This is vundle 
 set nocompatible              " required
 filetype off                  " required
+
+
+
+"==================================================================
+
+
+
 let g:user_emmet_leader_key=',' " sets emmit hoykey ,,
 let mapleader = " " 
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -27,6 +62,11 @@ if executable('rg')
 endif
 
 
+
+"==================================================================
+
+
+
 set ttyfast
 set lazyredraw
 set t_Co=256   
@@ -45,10 +85,49 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set spell spelllang=en_us
 "Word complete -- Not sure if i want this"
 set complete+=kspell
+set backspace=indent,eol,start
+
+"==================================================================
+
 
 
 " Mappings 
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Auto corects last word if misspelled
+imap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
+nmap <c-f> [s1z=<c-o>
+
+" My Custom Mappings related to ctrl-p
+" copied the idea for this from gary bernhardts vimrc
+map <leader>gj :CtrlP app/assets/javascripts<cr>
+map <leader>gv :CtrlP app/views<cr>
+map <leader>gf :CtrlP spec/factories<cr>
+map <leader>gc :CtrlP app/controllers<cr>
+map <leader>gm :CtrlP app/models<cr>
+map <leader>gh :CtrlPT app/helpers<cr>
+map <leader>gl :CtrlP lib<cr>
+map <leader>gsc :CtrlP spec/controllers<cr>
+map <leader>gsm :CtrlP spec/models<cr>
+map <leader>gsf :CtrlP spec/features<cr>
+
+
+"rails vim quicker mappings
+map <Leader>c :Econtroller
+"map <Leader>sc :RScontroller
+map <Leader>vc :EVcontroller
+map <Leader>m :Emodel
+"map <Leader>sm :RSmodel
+map <Leader>vm :EVmodel
+
+map <Leader>bb :!bundle install<cr>
+
+" easytag stuff
+map <Leader>retag :!ctags -R
+
+"==================================================================
+
+
+
 
 " create new tabs
 nnoremap <leader>t :tabnew<Enter>
@@ -80,25 +159,13 @@ inoremap /. <C-O>za
 nnoremap /. za
 onoremap /. <C-C>za
 vnoremap /. zf
-
-" Auto corects last word if misspelled
-imap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
-nmap <c-f> [s1z=<c-o>
-
 nnoremap <leader>f :Neoformat<Enter>
 nnoremap <leader>s :vsplit<Enter>
-" Fix brackets 
-inoremap {<CR> {<CR>}<C-o>O
-
-"get out of insert mode with a super seldom used character sequence
-inoremap jj <ESC>
-inoremap zz <%= %>
 nnoremap z1 1z=
 nnoremap <leader>e :edit 
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :tabnew<CR> 
 nnoremap <leader>b :!open % -a Google\ Chrome<CR>
-set backspace=indent,eol,start
 "
 "move around your splits with ctrl hjkl which b/c capslock is assigned to ctrl
 "works well
@@ -106,41 +173,68 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" My Custom Mappings related to ctrl-p
-" copied the idea for this from gary bernhardts vimrc
-map <leader>gj :CtrlP app/assets/javascripts<cr>
-map <leader>gv :CtrlP app/views<cr>
-map <leader>gf :CtrlP spec/factories<cr>
-map <leader>gc :CtrlP app/controllers<cr>
-map <leader>gm :CtrlP app/models<cr>
-map <leader>gh :CtrlPT app/helpers<cr>
-map <leader>gl :CtrlP lib<cr>
-map <leader>gsc :CtrlP spec/controllers<cr>
-map <leader>gsm :CtrlP spec/models<cr>
-map <leader>gsf :CtrlP spec/features<cr>
-
-
-"rails vim quicker mappings
-map <Leader>c :Econtroller
-"map <Leader>sc :RScontroller
-map <Leader>vc :EVcontroller
-map <Leader>m :Emodel
-"map <Leader>sm :RSmodel
-map <Leader>vm :EVmodel
-
-map <Leader>bb :!bundle install<cr>
-
 "save files with leader s
 nnoremap <leader>S :w<cr>
-" easytag stuff
-map <Leader>retag :!ctags -R
+
+
+"==================================================================
+
+" Fix brackets 
+inoremap {<CR> {<CR>}<C-o>O
+
+"get out of insert mode with a super seldom used character sequence
+inoremap jj <ESC>
+inoremap zz <%= %>
+
+
+
+"Ruby stuff:
+"==================================================================
+"
+syntax on                 " Enable syntax highlighting
+filetype plugin indent on " Enable filetype-specific indenting and plugins
+
+augroup myfiletypes
+    " Clear old autocmds in group
+    autocmd!
+    " autoindent with two spaces, always expand tabs
+    autocmd FileType ruby,eruby,yaml,markdown set ai sw=2 sts=2 et
+augroup END
+
+
+"==================================================================
+
+
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smartindent 
+autocmd bufnew, bufread *.js setl cindent
+autocmd bufnew, bufread *.c setl cindent 
+autocmd bufnew, bufread *.java setl cindent
+syntax on
+let g:molokai_original = 1 
+colorscheme molokai
+
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+
+
+let g:pymode_indent = 0
+let python_highlight_all=1
+
+
+syntax on
 
 
 
 
-
-
+"==================================================================
 
 call plug#begin('~/.vim/plugged')
 
@@ -155,7 +249,7 @@ call plug#end()
 
 
 
-
+"==================================================================
 
 
 
@@ -228,43 +322,3 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
-
-"Ruby stuff:
-" ================
-syntax on                 " Enable syntax highlighting
-filetype plugin indent on " Enable filetype-specific indenting and plugins
-
-augroup myfiletypes
-    " Clear old autocmds in group
-    autocmd!
-    " autoindent with two spaces, always expand tabs
-    autocmd FileType ruby,eruby,yaml,markdown set ai sw=2 sts=2 et
-augroup END
-" ================
-
-
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smartindent 
-autocmd bufnew, bufread *.js setl cindent
-autocmd bufnew, bufread *.c setl cindent 
-autocmd bufnew, bufread *.java setl cindent
-syntax on
-let g:molokai_original = 1 
-colorscheme molokai
-
-
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
-
-
-
-let g:pymode_indent = 0
-let python_highlight_all=1
-
-
-syntax on
