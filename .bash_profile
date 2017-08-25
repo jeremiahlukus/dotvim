@@ -1,3 +1,4 @@
+export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 #if command -v tmux>/dev/null; then
  # [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 #fi
@@ -134,3 +135,4 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+export PATH="/usr/local/opt/qt@5.5/bin:$PATH"

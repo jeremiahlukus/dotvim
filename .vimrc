@@ -2,9 +2,6 @@ execute pathogen#infect()
 " This is vundle 
 set nocompatible              " required
 filetype off                  " required
-imap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
-nmap <c-f> [s1z=<c-o>
-
 let g:user_emmet_leader_key=',' " sets emmit hoykey ,,
 let mapleader = " " 
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -84,8 +81,12 @@ nnoremap /. za
 onoremap /. <C-C>za
 vnoremap /. zf
 
-nnoremap <leader>f :Neoformat<Enter>
+" Auto corects last word if misspelled
+imap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
+nmap <c-f> [s1z=<c-o>
 
+nnoremap <leader>f :Neoformat<Enter>
+nnoremap <leader>s :vsplit<Enter>
 " Fix brackets 
 inoremap {<CR> {<CR>}<C-o>O
 
@@ -98,15 +99,7 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :tabnew<CR> 
 nnoremap <leader>b :!open % -a Google\ Chrome<CR>
 set backspace=indent,eol,start
-
-
-if executable('rg')
-    let g:ctrlp_user_command = 'rg --files %s'
-    let g:ctrlp_use_caching = 0
-    let g:ctrlp_working_path_mode = 'ra'
-    let g:ctrlp_switch_buffer = 'et'
-endif
-
+"
 "move around your splits with ctrl hjkl which b/c capslock is assigned to ctrl
 "works well
 nnoremap <C-h> <C-w>h
