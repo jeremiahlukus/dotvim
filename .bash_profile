@@ -8,7 +8,7 @@ set bell-style none
 
 alias mac="open https://www.youtube.com/playlist?list=PL23ZvcdS3XPLNdRYB_QyomQsShx59tpc-"
 alias loc="open http://localhost:3000"
-alias page="cd ~/jeremiahlukus.github.io"
+alias page="cd ~/desktop/gitpage"
 alias ls="ls -GFh"
 alias ..="cd .."
 alias ...="cd .. ; cd .."
