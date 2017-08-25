@@ -51,7 +51,7 @@ Launch vim and run `:PluginInstall`
 
 For help with emmit go here
 
-`chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#uri=http://docs.emmet.io/cheat-sheet/`
+`http://docs.emmet.io/cheat-sheet/`
 
 To activate NerdTREE launch vim then press the space bar then "n"
 
