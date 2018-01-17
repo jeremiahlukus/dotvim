@@ -1,40 +1,9 @@
-" TABLE OF CONTENTS 
-"
-" (line 40) let 
-"
-"
-" (line 70) set 
-"
-"
-" (line 95) map
-"
-" (line 133) normal mode remap
-"
-" (line 183) insert mode remap 
-"
-"
-" (line 194) ruby settings
-"
-"
-"
-" (line 217) python settings
-"
-"
-" (line 240)  plug
-"
-"
-" (line 259) vundle 
-
-
 execute pathogen#infect()
-" This is vundle 
-set nocompatible              " required
-filetype off                  " required
-
+syntax on
+filetype plugin indent on
 
 
 "==================================================================
-
 
 
 let g:user_emmet_leader_key=',' " sets emmit hoykey ,,
@@ -42,17 +11,33 @@ let mapleader = " "
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 let g:xml_syntax_folding = 1
-let g:used_javascript_libs = 'react,jquery'
+let g:used_javascript_libs = 'react,jquery,react-native'
 let g:airline#extensions#tabline#enabled = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
+"let g:syntastic_always_populate_loc_list = 0
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['eslint', 'jsxhint']
+"let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_only_msg_on_error = 1
+"let g:jsx_ext_required = 0
+"let g:ale_emit_conflict_warnings = 0
+let g:vim_jsx_pretty_enable_jsx_highlight = 0
+let g:vim_jsx_pretty_colorful_config = 1 
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<c-q>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 
+filetype plugin indent on
 let g:ackprg = 'rg --vimgrep --no-heading'
 if executable('rg')
   let g:ctrlp_user_command = 'rg --files %s'
@@ -65,8 +50,12 @@ endif
 
 "==================================================================
 
-
-
+set mouse=a
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 set ttyfast
 set lazyredraw
 set t_Co=256   
@@ -89,6 +78,19 @@ set backspace=indent,eol,start
 
 "==================================================================
 
+""" Tabs #tabs
+" - Two spaces wide
+set tabstop=2
+set softtabstop=2
+" - Expand them all
+set expandtab
+" - Indent by 2 spaces by default
+set shiftwidth=2
+" turn off mouse
+set mouse=""
+"" Format Options #format-options
+set formatoptions=tcrq
+set textwidth=80
 
 
 " Mappings 
@@ -206,7 +208,6 @@ augroup END
 
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smartindent 
-autocmd bufnew, bufread *.js setl cindent
 autocmd bufnew, bufread *.c setl cindent 
 autocmd bufnew, bufread *.java setl cindent
 syntax on
@@ -228,6 +229,11 @@ au BufNewFile,BufRead *.py
 let g:pymode_indent = 0
 let python_highlight_all=1
 
+" Auto-format on save
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.js,*.jsx Neoformat prettier
+augroup END
 
 syntax on
 
@@ -240,8 +246,19 @@ call plug#begin('~/.vim/plugged')
 
 " JS beauty
 Plug 'sbdchd/neoformat'
-
-
+Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'SirVer/ultisnips'
+"
+" " Currently, es6 version of snippets is available in es6 branch only
+" Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
+"
+" Plug 'honza/vim-snippets' "optional
+"
+" " vim-plug
+" Plug 'jbgutierrez/vim-babel'
+" Plug 'mattn/webapi-vim'
 
 
 call plug#end()
@@ -265,9 +282,17 @@ Plugin 'gmarik/Vundle.vim'
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 Plugin 'tmhedberg/SimpylFold'
 
+Plugin 'editorconfig/editorconfig-vim'
+" Track the engine.
+"Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 
 "React syntax highlight
 Plugin 'mxw/vim-jsx'
+
+"Plugin 'JavaScript-Indent'
 
 "Bundle 'Valloric/YouCompleteMe'
 
@@ -322,3 +347,20 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
+
+
+
+"==============================
+map <Leader>l :action Run<Enter>
+
+
+
+
+" Put these lines at the very end of your vimrc file.
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL

@@ -1,3 +1,6 @@
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 #if command -v tmux>/dev/null; then
  # [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
@@ -17,10 +20,15 @@ alias weather="curl -s wttr.in/Atlanta"
 alias vim="/usr/local/Cellar/vim/8.0.0666_1/bin/vim"
 alias pop="rake sample:populate"
 alias swp="find ./ -type f -name "\.*sw[klmnop]" -delete"
+# docker
+alias du="docker-compose up"
+
+
+
 #Heroku
 alias hp="git push heroku master"
 alias ho="heroku open"
-alias hrake="heroku run rake db:migrate"
+alias hdbm="heroku run rake db:migrate"
 
 # CD 
 alias boot="cd ~/railsapps/webBootColt"
@@ -30,6 +38,8 @@ alias time="cd ~/railsApps/time-Log"
 alias tutor="cd ~/railsapps/tutrz"
 alias learnr="cd ~/railsapps/basicrails/reddit"
 alias learn="cd ~/railsapps/basicrails"
+alias stordoi="cd ~/railsApps/stord/order-inventory"
+alias snap="cd  ~/code/reactnative/snapchat"
 #tutrz
 alias hredo="heroku pg:reset && heroku pg:push tutrz_development HEROKU_POSTGRESQL_AMBER_URL --app tutrz"
 
