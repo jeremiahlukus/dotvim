@@ -1,3 +1,6 @@
+# My new dotfiles are [here](https://github.com/jeremiahlukus/dotfiles)
+# This repo is here for reference and is not used anymore
+
 # dotvim
 holds my vim profile  and my bash profile
 
